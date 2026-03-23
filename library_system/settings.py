@@ -37,9 +37,9 @@ STORAGES = {
 SECRET_KEY = 'django-insecure-yy+4rt%tr8^m4j^cdqxkc%%_7o4g&@e(w^0kawv6$=$dpm&ac^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -130,4 +130,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+# Insert this right after MIDDLEWARE
+import os
 
+# This tells Django: "If we are NOT on my computer, use Whitenoise"
+if not DEBUG:
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
